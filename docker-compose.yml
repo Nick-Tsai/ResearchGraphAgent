@@ -6,6 +6,8 @@ services:
     volumes:
       - ./data:/data
       - ./backend/firecrawl_pool.json:/app/firecrawl_pool.json
+    environment:
+      - ROOT_PATH=/research
     env_file:
       - ./backend/.env
     ports:

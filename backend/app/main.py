@@ -53,7 +53,9 @@ async def lifespan(app: FastAPI):
         pass
 
 
-app = FastAPI(title="Research Graph Agent", version="0.1.0", lifespan=lifespan)
+import os
+ROOT_PATH = os.getenv("ROOT_PATH", "")
+app = FastAPI(title="Research Graph Agent", version="0.1.0", lifespan=lifespan, root_path=ROOT_PATH if ROOT_PATH else None)
 
 app.add_middleware(
     CORSMiddleware,
