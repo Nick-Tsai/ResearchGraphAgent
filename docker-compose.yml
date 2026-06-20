@@ -8,6 +8,7 @@ services:
       - ./backend/firecrawl_pool.json:/app/firecrawl_pool.json
     environment:
       - ROOT_PATH=/research
+      - CORS_ORIGINS=http://localhost:3000,https://zhimingjun.com
     env_file:
       - ./backend/.env
     ports:

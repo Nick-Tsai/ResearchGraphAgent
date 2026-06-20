@@ -59,7 +59,7 @@ app = FastAPI(title="Research Graph Agent", version="0.1.0", lifespan=lifespan, 
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "https://zhimingjun.com", "http://zhimingjun.com"],
+    allow_origins=os.getenv("CORS_ORIGINS", "http://localhost:3000").split(","),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -78,7 +78,7 @@ async def global_exception_handler(request: Request, exc: Exception):
         status_code=status,
         content={"detail": detail},
         headers={
-            "Access-Control-Allow-Origin": "http://localhost:3000",
+            "Access-Control-Allow-Origin": os.getenv("CORS_ORIGINS", "http://localhost:3000").split(",")[0],
             "Access-Control-Allow-Credentials": "true",
             "Access-Control-Allow-Methods": "*",
             "Access-Control-Allow-Headers": "*",
