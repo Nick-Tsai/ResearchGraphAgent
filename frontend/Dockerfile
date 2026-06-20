@@ -4,6 +4,7 @@ COPY package*.json ./
 RUN npm config set registry https://registry.npmmirror.com && npm ci
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV NEXT_PUBLIC_BASE_PATH=/research
 RUN npm run build
 
 FROM m.daocloud.io/docker.io/library/node:21-slim AS runner
