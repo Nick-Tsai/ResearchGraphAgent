@@ -12,7 +12,7 @@ import type {
   Article,
 } from "./types";
 
-const API_BASE = "http://127.0.0.1:8000/api";
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE || "http://127.0.0.1:8000/api";
 
 async function request<T>(url: string, options?: RequestInit & { timeoutMs?: number }): Promise<T> {
   const timeoutMs = options?.timeoutMs;

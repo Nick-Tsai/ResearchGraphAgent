@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./backend
+    container_name: rga-backend
+    restart: unless-stopped
+    volumes:
+      - ./data:/data
+      - ./backend/firecrawl_pool.json:/app/firecrawl_pool.json
+    env_file:
+      - ./backend/.env
+    networks:
+      - app-network
+
+  frontend:
+    build: ./frontend
+    container_name: rga-frontend
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_BASE=/research/api
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
