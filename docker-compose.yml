@@ -4,7 +4,7 @@ services:
     container_name: rga-backend
     restart: unless-stopped
     volumes:
-      - ./data:/data
+      - db-data:/data
       - ./backend/firecrawl_pool.json:/app/firecrawl_pool.json
     environment:
       - ROOT_PATH=/research
@@ -28,6 +28,10 @@ services:
       - "3001:3000"
     networks:
       - app-network
+
+volumes:
+  db-data:
+    driver: local
 
 networks:
   app-network:
