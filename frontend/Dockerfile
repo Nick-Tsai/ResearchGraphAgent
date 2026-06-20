@@ -1,14 +1,12 @@
-# Build stage
-FROM node:21-slim AS builder
+FROM m.daocloud.io/docker.io/library/node:21-slim AS builder
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci
+RUN npm config set registry https://registry.npmmirror.com && npm ci
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
-# Production stage
-FROM node:21-slim AS runner
+FROM m.daocloud.io/docker.io/library/node:21-slim AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1

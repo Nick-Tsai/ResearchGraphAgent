@@ -1,16 +1,13 @@
-FROM python:3.14-slim
+FROM m.daocloud.io/docker.io/library/python:3.14-slim
 
 WORKDIR /app
 
-# Install dependencies
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
 
-# Copy source
 COPY app/ ./app/
-COPY firecrawl_pool.json . 2>/dev/null || echo '{"instances":[]}' > firecrawl_pool.json
+RUN test -f firecrawl_pool.json || echo '{"instances":[]}' > firecrawl_pool.json
 
-# Create data directory for SQLite
 RUN mkdir -p /data
 ENV DATABASE_URL=sqlite:////data/research_graph_agent.db
 
