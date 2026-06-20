@@ -26,7 +26,7 @@ class DeepSeekProvider(ModelProvider):
             )
         return self._client
 
-    async def complete(self, prompt: str, max_tokens: int = 4096) -> str:
+    async def complete(self, prompt: str, max_tokens: int = 8192) -> str:
         if not self._api_key:
             raise ValueError("DEEPSEEK_API_KEY is not set")
 

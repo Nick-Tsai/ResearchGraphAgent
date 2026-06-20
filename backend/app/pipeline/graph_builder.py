@@ -218,7 +218,7 @@ async def build_graph(
             falsification_text=falsification_text,
             evidence_lines=evidence_lines,
         )
-        raw = await provider.complete(prompt, max_tokens=4096)
+        raw = await provider.complete(prompt, max_tokens=8192)
         raw = _clean_text(raw)
         if "[NODE]" not in raw:
             raw = _fallback_dimension_nodes(dim_name, dim_desc)
@@ -305,7 +305,7 @@ async def build_graph(
         audience=audience,
         nodes_lines=nodes_lines,
     )
-    relations_raw = _clean_text(await provider.complete(review_prompt, max_tokens=8192))
+    relations_raw = _clean_text(await provider.complete(review_prompt, max_tokens=16384))
     compiler_sections.append("# Relations\n" + relations_raw)
 
     edges: list[GraphEdge] = list(compiled_edges)

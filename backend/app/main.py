@@ -221,7 +221,7 @@ async def _generate_article(project: Project, provider: ModelProvider, session: 
         f"Topic: {project.topic}\n"
         f"Structured memories:\n{json.dumps([{ 'stage': m.stage, 'content': m.content } for m in memories], ensure_ascii=False, indent=2)}"
     )
-    raw = await provider.complete(prompt, max_tokens=8192)
+    raw = await provider.complete(prompt, max_tokens=16384)
     try:
         data = json.loads(raw)
     except json.JSONDecodeError as exc:
